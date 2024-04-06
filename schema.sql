@@ -1,9 +1,20 @@
-CREATE DATABASE Managers_db;
-use Managers_db;
+CREATE DATABASE Orca_db;
+use Orca_db;
+
+CREATE TABLE Properties (
+    propertyID INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL
+    numberUnits INT NOTNULL, 
+    managerID INT FOREIGN KEY REFERENCES Managers(managerID)
+);
+
+CREATE TABLE Resident (
+    residentID INT AUTO_INCREMENT PRIMARY KEY,
+    wallet VARCHAR(255) NOT NULL, 
+    propertyidID INT FOREIGN KEY REFERENCES Managers(propertyID)
+);
 
 CREATE TABLE Managers (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    manager VARCHAR(255) NOT NULL,
-    building VARCHAR(255) NOT NULL,
-    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    managerID INT AUTO_INCREMENT PRIMARY KEY,
+    wallet VARCHAR(255) NOT NULL,
 );

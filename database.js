@@ -24,11 +24,11 @@ export async function getManager(id) {
     return result[0]
 }
 
-export async function addManager(name, Property){
+export async function addManager(manager, building){
     const [result] = await pool.query(`
-    INSERT INTO Managers (name, Property)
+    INSERT INTO Managers (manager, building)
     VALUES(?,?)
-    `, [name, Property])
+    `, [manager, building])
     const id = result.insertId
     return getManager(id)
 }

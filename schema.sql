@@ -3,7 +3,7 @@ use Managers_db;
 
 CREATE TABLE Managers (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    property VARCHAR(255) NOT NULL,
+    manager VARCHAR(255) NOT NULL,
+    building VARCHAR(255) NOT NULL,
     created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );

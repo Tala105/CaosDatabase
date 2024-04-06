@@ -1,8 +1,9 @@
 import express from 'express'
 import { getManagers, getManager, addManager} from './database.js'
 
-
 const app = express()
+
+app.use(express.json())
 
 app.get('/Managers', async (req, res) => {
     const Managers = await getManagers()
@@ -16,7 +17,9 @@ app.get('/Managers/:id', async (req, res) => {
 })
 
 app.post('/addManager', async (req, res) => {
-    const { }
+    const { manager, building } = req.body
+    const property = await addManager(manager, building)
+    res.status(201).send(property)
 })
 
 app.use((err, req, res, next) => {

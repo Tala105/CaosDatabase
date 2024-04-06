@@ -25,7 +25,7 @@ app.get('/Managers/:id', async (req, res) => {
     res.send(note)
 })
 
-app.get('/addManager', async (req, res) => {
+app.post('/addManager', async (req, res) => {
     const { manager, building } = req.body
     const property = await addManager(manager, building)
     res.status(201).send(property)

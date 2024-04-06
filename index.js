@@ -1,9 +1,11 @@
 import express from 'express'
 import { getManagers, getManager, addManager} from './database.js'
+import cors from 'cors'
 
 const app = express()
 
 app.use(express.json())
+app.use(cors())
 
 app.get('/Managers', async (req, res) => {
     const Managers = await getManagers()

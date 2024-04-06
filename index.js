@@ -1,10 +1,18 @@
 import express from 'express'
 import { getManagers, getManager, addManager} from './database.js'
+import cors from 'cors'
 
 const app = express()
 
 app.use(express.json())
+app.use(cors({origin: '*'}))
 
+app.use((err, req, res, next) => {
+    console.log(err.stack)
+    res.status(500).send("Something broke!")
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+})
 
 app.get('/Properties', async (req, res) => {
     const Properties = await getProperties()
@@ -58,6 +66,15 @@ app.post('/addManager', async (req, res) => {
 })
 
 
+
+app.use((err, req, res, next) => {
+    console.log(err.stack)
+    res.status(500).send("Something broke!")
+})
+
+app.listen(8080, () => {
+    console.log("Server is running on port 8080")
+})
 
 app.use((err, req, res, next) => {
     console.log(err.stack)

@@ -48,11 +48,11 @@ export async function getResident(id) {
     return result[0]
 }
 
-export async function addResident(wallet, propertyID){
+export async function addResident(wallet){
     const [result] = await pool.query(`
-    INSERT INTO Residents (wallet, propertyID)
-    VALUES(?,?)
-    `, [wallet, propertyID])
+    INSERT INTO Residents (wallet)
+    VALUES(?)
+    `, [wallet])
     const id = result.insertId
     return getResident(id)
 }
@@ -71,11 +71,11 @@ export async function getProperty(id) {
     return result[0]
 }
 
-export async function addProperty(name, numberUnits, managerID){
+export async function addProperty(Rent, Bills, Maintenance, Events, ERC, managerID){
     const [result] = await pool.query(`
-    INSERT INTO Properties (name, numberUnits, managerID)
-    VALUES(?,?,?)
-    `, [name, numberUnits, managerID])
+    INSERT INTO Properties (Rent, Bills, Maintenance, Events, ERC, managerID)
+    VALUES(?,?,?,?,?,?)
+    `, [Rent, Bills, Maintenance, Events, ERC, managerID])
     const id = result.insertId
     return getProperty(id)
 }

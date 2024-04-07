@@ -10,8 +10,8 @@ const corsOptions = {
     allowedHeaders: 'Content-Type,Authorization',
 }
 
-app.use(express.json())
 app.use(cors(corsOptions))
+app.use(express.json())
 
 app.use((err, req, res, next) => {
     console.log(err.stack)

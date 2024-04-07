@@ -1,5 +1,5 @@
 import express from 'express'
-import { getManagers, getManager, addManager} from './database.js'
+import * as db from './database.js'
 import cors from 'cors'
 
 const app = express()
@@ -15,53 +15,53 @@ app.use((err, req, res, next) => {
 })
 
 app.get('/Properties', async (req, res) => {
-    const Properties = await getProperties()
+    const Properties = await db.getProperties()
     res.send(Properties)
 })
 
 app.get('/Properties/:id', async (req, res) => {
     const id = req.params.id
-    const note = await getProperty(id)
+    const note = await db.getProperty(id)
     res.send(note)
 })
 
 app.post('/addProperty', async (req, res) => {
     const { name, mumberUnits, managerID } = req.body
-    const Property  = await addProperty(name, mumberUnits, managerID)
+    const Property  = await db.addProperty(name, mumberUnits, managerID)
     res.status(201).send(Property)
 })
 
 app.get('/Residents', async (req, res) => {
-    const Residents = await getResidents()
+    const Residents = await db.getResidents()
     res.send(Residents)
 })
 
 app.get('/Residents/:id', async (req, res) => {
     const id = req.params.id
-    const note = await getResident(id)
+    const note = await db.getResident(id)
     res.send(note)
 })
 
 app.post('/addResident', async (req, res) => {
     const { wallet, propertyID } = req.body
-    const Resident  = await addResident(wallet, propertyID)
+    const Resident  = await db.addResident(wallet, propertyID)
     res.status(201).send(Resident)
 })
 
 app.get('/Managers', async (req, res) => {
-    const Managers = await getManagers()
+    const Managers = await db.getManagers()
     res.send(Managers)
 })
 
 app.get('/Managers/:id', async (req, res) => {
     const id = req.params.id
-    const note = await getManager(id)
+    const note = await db.getManager(id)
     res.send(note)
 })
 
 app.post('/addManager', async (req, res) => {
     const { wallet } = req.body
-    const manager  = await addManager(wallet)
+    const manager  = await db.addManager(wallet)
     res.status(201).send(manager)
 })
 

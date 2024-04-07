@@ -13,11 +13,15 @@ const corsOptions = {
 app.use(express.json())
 app.use(cors(corsOptions))
 
-app.use((err, req, res, next) => {
-    console.log(err.stack)
-    res.status(500).send("Something broke!")
+app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    next()
 })
 
 app.get('/Properties', async (req, res) => {
@@ -32,8 +36,8 @@ app.get('/Properties/:id', async (req, res) => {
 })
 
 app.post('/addProperty', async (req, res) => {
-    const { name, mumberUnits, managerID } = req.body
-    const Property  = await db.addProperty(name, mumberUnits, managerID)
+    const { name, numberUnits, managerID } = req.body
+    const Property  = await db.addProperty(name, numberUnits, managerID)
     res.status(201).send(Property)
 })
 

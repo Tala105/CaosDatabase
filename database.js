@@ -51,7 +51,7 @@ export async function getResident(id) {
 export async function addResident(wallet, propertyID){
     const [result] = await pool.query(`
     INSERT INTO Residents (wallet, propertyID)
-    VALUES(?,?,?)
+    VALUES(?,?)
     `, [wallet, propertyID])
     const id = result.insertId
     return getResident(id)

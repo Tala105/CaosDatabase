@@ -24,6 +24,7 @@ export async function getManager(id) {
     return result[0]
 }
 
+
 export async function addManager(wallet){
     const [result] = await pool.query(`
     INSERT INTO Managers (wallet)

@@ -4,8 +4,14 @@ import cors from 'cors'
 
 const app = express()
 
+const corsOptions = {
+    origin: '*',
+    methods: 'GET,PUT,POST,DELETE',
+    allowedHeaders: 'Content-Type,Authorization',
+}
+
 app.use(express.json())
-app.use(cors({origin: '*'}))
+app.use(cors(corsOptions))
 
 app.use((err, req, res, next) => {
     console.log(err.stack)

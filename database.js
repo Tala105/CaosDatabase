@@ -19,7 +19,7 @@ export async function getManager(id) {
     const [result] = await pool.query(`
     SELECT *
     FROM Managers
-    WHERE id = ?
+    WHERE managerID = ?
     `, [id])
     return result[0]
 }
@@ -43,7 +43,7 @@ export async function getResident(id) {
     const [result] = await pool.query(`
     SELECT *
     FROM Residents
-    WHERE id = ?
+    WHERE residentID = ?
     `, [id])
     return result[0]
 }
@@ -66,7 +66,7 @@ export async function getProperty(id) {
     const [result] = await pool.query(`
     SELECT *
     FROM Properties
-    WHERE id = ?
+    WHERE propertyID = ?
     `, [id])
     return result[0]
 }

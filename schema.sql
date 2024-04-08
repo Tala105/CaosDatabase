@@ -3,6 +3,7 @@ use Orca_db;
 
 CREATE TABLE Properties (
     propertyID INT AUTO_INCREMENT PRIMARY KEY,
+    propertyName VARCHAR(255) NOT NULL,
     Rent VARCHAR(255) NOT NULL,
     Bills VARCHAR(255) NOT NULL,
     Maintenance VARCHAR(255) NOT NULL,
@@ -20,4 +21,22 @@ CREATE TABLE Resident (
 CREATE TABLE Managers (
     managerID INT AUTO_INCREMENT PRIMARY KEY,
     wallet VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE ResidentsTransactions (
+    resitrID INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(255) NOT NULL,
+    value INT NOT NULL,
+    residentID INT NOT NULL,
+    FOREIGN KEY(residentID) REFERENCES Resident(residentID),
+    date TIMESTAMP NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE PropertyTransactions (
+    proptrID INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(255) NOT NULL,
+    value INT NOT NULL,
+    propertytID INT NOT NULL,
+    FOREIGN KEY(propertytID) REFERENCES Properties(propertytID),
+    date TIMESTAMP NOT NULL DEFAULT NOW()
 );

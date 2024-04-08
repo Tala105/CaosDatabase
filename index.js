@@ -75,6 +75,40 @@ app.post('/addManager', async (req, res) => {
     res.status(201).send(manager)
 })
 
+app.get('/ResidentsTransactions', async (req, res) => {
+    const ResidentsTransactions = await db.getResidentsTransactions()
+    res.send(ResidentsTransactions)
+})
+
+app.get('/ResidentsTransactions/:id', async (req, res) => {
+    const id = req.params.id
+    const note = await db.getResidentTransaction(id)
+    res.send(note)
+})
+
+app.post('/addResidentTransaction', async (req, res) => {
+    const { value, type, residentID } = req.body
+    const ResidentTransaction  = await db.addResidentTransaction(value, type, residentID)
+    res.status(201).send(ResidentTransaction)
+})
+
+app.get('/PropertiesTransactions', async (req, res) => {
+    const PropertiesTransactions = await db.getPropertiesTransactions()
+    res.send(PropertiesTransactions)
+})
+
+app.get('/PropertiesTransactions/:id', async (req, res) => {
+    const id = req.params.id
+    const note = await db.getPropertyTransaction(id)
+    res.send(note)
+})
+
+app.post('/addPropertyTransaction', async (req, res) => {
+    const { value, type, PropertyID } = req.body
+    const PropertyTransaction  = await db.addPropertyTransaction(value, type, PropertyID)
+    res.status(201).send(PropertyTransaction)
+})
+
 
 
 app.use((err, req, res, next) => {

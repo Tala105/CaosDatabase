@@ -79,3 +79,49 @@ export async function addProperty(Rent, Bills, Maintenance, Events, ERC, manager
     const id = result.insertId
     return getProperty(id)
 }
+
+export async function getResidentsTransactions(){
+    const [result] = await pool.query("SELECT * FROM ResidentsTransactions")
+    return result
+}
+
+export async function getResidentTransaction(id) {
+    const [result] = await pool.query(`
+    SELECT *
+    FROM ResidentsTransactions
+    WHERE resitrID = ?
+    `, [id])
+    return result[0]
+}
+
+export async function addResidentTransaction(value, type, residentID){
+    const [result] = await pool.query(`
+    INSERT INTO ResidentsTransactions (value, type, residentID)
+    VALUES(?,?,?)
+    `, [value, type, residentID])
+    const id = result.insertId
+    return getResidentTransaction(id)
+}
+
+export async function getPropertiesTransactions(){
+    const [result] = await pool.query("SELECT * FROM PropertiesTransactions")
+    return result
+}
+
+export async function getPropertyTransaction(id) {
+    const [result] = await pool.query(`
+    SELECT *
+    FROM PropertiesTransactions
+    WHERE resitrID = ?
+    `, [id])
+    return result[0]
+}
+
+export async function addPropertyTransaction(value, type, propertyID){
+    const [result] = await pool.query(`
+    INSERT INTO PropertiesTransactions (value, type, propertyID)
+    VALUES(?,?,?)
+    `, [value, type, propertyID])
+    const id = result.insertId
+    return getPropertyTransaction(id)
+}

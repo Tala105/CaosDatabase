@@ -36,8 +36,8 @@ app.get('/Properties/:id', async (req, res) => {
 })
 
 app.post('/addProperty', async (req, res) => {
-    const { propertyName, Rent, Bills, Maintenance, Events, ERC, managerID } = req.body
-    const Property  = await db.addProperty(propertyName, Rent, Bills, Maintenance, Events, ERC, managerID)
+    const { propertyName, Rent, Bills, Maintenance, Event, ERC, managerID } = req.body
+    const Property  = await db.addProperty(propertyName, Rent, Bills, Maintenance, Event, ERC, managerID)
     res.status(201).send(Property)
 })
 
@@ -108,8 +108,6 @@ app.post('/addPropertyTransaction', async (req, res) => {
     const PropertyTransaction  = await db.addPropertyTransaction(value, type, PropertyID)
     res.status(201).send(PropertyTransaction)
 })
-
-
 
 app.use((err, req, res, next) => {
     console.log(err.stack)

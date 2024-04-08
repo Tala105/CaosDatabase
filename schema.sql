@@ -8,7 +8,8 @@ CREATE TABLE Properties (
     Maintenance VARCHAR(255) NOT NULL,
     Event VARCHAR(255) NOT NULL,
     ERC VARCHAR(255) NOT NULL,
-    managerID INT FOREIGN KEY REFERENCES Managers(managerID) NOT NULL
+    managerID INT NOT NULL,
+    FOREIGN KEY(managerID) REFERENCES Managers(managerID)
 );
 
 CREATE TABLE Resident (

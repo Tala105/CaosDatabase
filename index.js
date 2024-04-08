@@ -36,8 +36,8 @@ app.get('/Properties/:id', async (req, res) => {
 })
 
 app.post('/addProperty', async (req, res) => {
-    const { Rent, Bills, Maintenance, Events, ERC, managerID } = req.body
-    const Property  = await db.addProperty(Rent, Bills, Maintenance, Events, ERC, managerID)
+    const { propertyName, Rent, Bills, Maintenance, Events, ERC, managerID } = req.body
+    const Property  = await db.addProperty(propertyName, Rent, Bills, Maintenance, Events, ERC, managerID)
     res.status(201).send(Property)
 })
 

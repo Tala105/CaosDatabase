@@ -3,6 +3,7 @@ use Orca_db;
 
 CREATE TABLE Properties (
     propertyID INT AUTO_INCREMENT PRIMARY KEY,
+    propertyName VARCHAR(255) NOT NULL,
     Rent VARCHAR(255) NOT NULL,
     Bills VARCHAR(255) NOT NULL,
     Maintenance VARCHAR(255) NOT NULL,
@@ -36,6 +37,6 @@ CREATE TABLE PropertyTransactions (
     type VARCHAR(255) NOT NULL,
     value INT NOT NULL,
     propertytID INT NOT NULL,
-    FOREIGN KEY(propertID) REFERENCES Properties(propertID),
+    FOREIGN KEY(propertytID) REFERENCES Properties(propertytID),
     date TIMESTAMP NOT NULL DEFAULT NOW()
 );

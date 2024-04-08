@@ -53,8 +53,8 @@ app.get('/Residents/:id', async (req, res) => {
 })
 
 app.post('/addResident', async (req, res) => {
-    const { wallet } = req.body
-    const Resident  = await db.addResident(wallet)
+    const { wallet, propertyID } = req.body
+    const Resident  = await db.addResident(wallet, propertyID)
     res.status(201).send(Resident)
 })
 

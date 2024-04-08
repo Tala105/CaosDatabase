@@ -36,8 +36,8 @@ app.get('/Properties/:id', async (req, res) => {
 })
 
 app.post('/addProperty', async (req, res) => {
-    const { name, numberUnits, managerID } = req.body
-    const Property  = await db.addProperty(name, numberUnits, managerID)
+    const { Rent, Bills, Maintenance, Events, ERC, managerID } = req.body
+    const Property  = await db.addProperty(Rent, Bills, Maintenance, Events, ERC, managerID)
     res.status(201).send(Property)
 })
 
@@ -53,8 +53,8 @@ app.get('/Residents/:id', async (req, res) => {
 })
 
 app.post('/addResident', async (req, res) => {
-    const { wallet, propertyID } = req.body
-    const Resident  = await db.addResident(wallet, propertyID)
+    const { wallet } = req.body
+    const Resident  = await db.addResident(wallet)
     res.status(201).send(Resident)
 })
 

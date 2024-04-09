@@ -1,6 +1,7 @@
 import express from 'express'
 import * as db from './database.js'
 import cors from 'cors'
+import { verify } from './verify.js'
 
 const app = express()
 
@@ -107,6 +108,36 @@ app.post('/addPropertyTransaction', async (req, res) => {
     const { value, type, PropertyID } = req.body
     const PropertyTransaction  = await db.addPropertyTransaction(value, type, PropertyID)
     res.status(201).send(PropertyTransaction)
+})
+
+app.post('/verifyERC20', async (req, res) => {
+    const { tokenAddress } = req.body
+    await verify(tokenAddress, ["MyToken", "TKN", 1000])
+    res.status(201).send("Contract Verified!")
+})
+
+app.post('/verifyMaintenence', async (req, res) => {
+    const { maintenenceAddress } = req.body
+    await verify(maintenenceAddress, [])
+    res.status(201).send("Contract Verified!")
+})
+
+app.post('/verifyRent', async (req, res) => {
+    const { rentAddress, tokenAddress, residents } = req.body
+    await verify(rentAddress, [tokenAddress, residents])
+    res.status(201).send("Contract Verified!")
+})
+
+app.post('/verifyEvents', async (req, res) => {
+    const { eventsAddress, rentAddress, tokenAddress } = req.body
+    await verify(eventsAddress, [rentAddress, tokenAddress])
+    res.status(201).send("Contract Verified!")
+})
+
+app.post('/verifyBills', async (req, res) => {
+    const { billsAddress } = req.body
+    await verify(billsAddress, [])
+    res.status(201).send("Contract Verified!")
 })
 
 app.use((err, req, res, next) => {

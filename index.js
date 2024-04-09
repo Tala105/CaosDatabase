@@ -36,6 +36,12 @@ app.get('/Properties/:id', async (req, res) => {
     res.send(note)
 })
 
+app.get('/Properties/manager/:id', async (req, res) => {
+    const id = req.params.id
+    const note = await db.getPropertyByManagerId(id)
+    res.send(note)
+})
+
 app.post('/addProperty', async (req, res) => {
     const { propertyName, Rent, Bills, Maintenance, Event, ERC, managerID } = req.body
     const Property  = await db.addProperty(propertyName, Rent, Bills, Maintenance, Event, ERC, managerID)
@@ -50,6 +56,12 @@ app.get('/Residents', async (req, res) => {
 app.get('/Residents/:id', async (req, res) => {
     const id = req.params.id
     const note = await db.getResident(id)
+    res.send(note)
+})
+
+app.get('/Residents/property/:id', async (req, res) => {
+    const id = req.params.id
+    const note = await db.getResidentsByPropertyId(id)
     res.send(note)
 })
 

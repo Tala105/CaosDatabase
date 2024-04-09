@@ -71,6 +71,15 @@ export async function getProperty(id) {
     return result[0]
 }
 
+export async function getPropertyByManagerId(id) {
+    const [result] = await pool.query(`
+    SELECT *
+    FROM Properties
+    WHERE managerID = ?
+    `, [id])
+    return result[0]
+} 
+
 export async function addProperty(propertyName, Rent, Bills, Maintenance, Event, ERC, managerID){
     const [result] = await pool.query(`
     INSERT INTO Properties (propertyName, Rent, Bills, Maintenance, Event, ERC, managerID)
@@ -92,6 +101,15 @@ export async function getResidentTransaction(id) {
     WHERE resitrID = ?
     `, [id])
     return result[0]
+}
+
+export async function getResidentsByPropertyId(id) {
+    const [result] = await pool.query(`
+    SELECT *
+    FROM Residents
+    WHERE propertyID = ?
+    `, [id])
+    return result
 }
 
 export async function addResidentTransaction(value, type, residentID){
